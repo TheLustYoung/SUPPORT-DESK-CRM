@@ -28,3 +28,4 @@ include = ["backend*", "bots*", "workers*", "infrastructure*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
