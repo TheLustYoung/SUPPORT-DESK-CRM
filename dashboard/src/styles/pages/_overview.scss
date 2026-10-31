@@ -1,0 +1,19 @@
+/* overview */
+.agent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.agent-tile { background: var(--card-2); border: 1px solid var(--border); border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 2px; }
+.agent-tile .big { font-size: 26px; font-weight: 700; }
+.agent-tile small { color: var(--muted); font-size: 12px; }
+.card.tip { background: radial-gradient(400px 200px at 50% 120%, var(--accent-soft), transparent), var(--card); display: flex; flex-direction: column; }
+.card.tip ol { margin: 0 0 14px; padding-inline-start: 20px; }
+.card.tip .btn-primary { align-self: center; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart .grid-line { stroke: var(--border); }
+.chart .axis { fill: var(--muted); font-size: 11px; }
+.chart .hover-line { stroke: var(--border-strong); stroke-dasharray: 4 4; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-inline-end: 6px; }
+.legend b { color: var(--text); font-weight: 500; }
+.bars { display: flex; flex-direction: column; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: minmax(100px, 30%) 1fr 50px; gap: 10px; align-items: center; font-size: 13px; }
+.bar-row i { display: block; height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); min-width: 2px; }
+.bar-row b { text-align: end; }

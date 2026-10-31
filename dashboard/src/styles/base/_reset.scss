@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0; color: var(--text); font: 14px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: radial-gradient(900px 600px at 15% 10%, var(--glow-1), transparent 60%),
+              radial-gradient(800px 600px at 85% 90%, var(--glow-2), transparent 60%),
+              linear-gradient(160deg, var(--bg), var(--bg-2)) fixed;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--accent-2); }
+.boot { display: grid; place-items: center; height: 100%; color: var(--muted); }

@@ -1,0 +1,43 @@
+# Secrets and local runs (never commit)
+.env
+.env.*
+!.env.example
+secrets/
+local/
+data/
+*.db
+*.sqlite3
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Node / dashboard build
+node_modules/
+dashboard/dist/
+*.tsbuildinfo
+
+# Logs and temp files
+*.log
+*.tmp
+tmp/
+
+# Editors, OS and local tooling
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+.claude/
+CLAUDE.md
+AGENTS.md
+.cursor/

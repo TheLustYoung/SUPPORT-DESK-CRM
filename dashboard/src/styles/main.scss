@@ -1,0 +1,30 @@
+// AfoninWebStudio Support Desk: dashboard styles.
+//
+// abstracts/  design tokens, functions and mixins; produce no CSS by themselves
+// themes/     tokens -> CSS custom properties for the light (default) and dark themes
+// base/       element defaults and layout guards
+// layout/     app shell and the phone/tablet layout
+// components/ reusable UI pieces
+// pages/      page-specific rules; pages/desk holds the reference-based redesign and is loaded last
+//
+// Partials are loaded in cascade order: later files may refine earlier ones.
+
+@use 'themes/theme';
+
+@use 'base/reset';
+@use 'layout/shell';
+@use 'components/controls';
+@use 'layout/phones';
+@use 'components/page-pieces';
+@use 'components/kpi';
+@use 'components/lists';
+@use 'components/modal';
+@use 'pages/tickets';
+@use 'pages/overview';
+@use 'components/rich-content';
+@use 'pages/faq';
+@use 'pages/settings';
+@use 'base/guards';
+
+@use 'pages/desk';
+@use 'pages/login';

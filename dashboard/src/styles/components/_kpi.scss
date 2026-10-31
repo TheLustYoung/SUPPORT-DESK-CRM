@@ -1,0 +1,9 @@
+/* KPI tiles */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.kpi small, .kpis.small small { color: var(--muted); display: block; }
+.kpi b { display: block; font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0; }
+.kpi span, .kpis.small span { color: var(--muted); font-size: 12px; }
+.kpis.small { margin-bottom: 16px; }
+.kpis.small > div { background: var(--card-2); border-radius: 14px; padding: 12px 14px; }
+.kpis.small b { font-size: 22px; display: block; }
+.stats-line { display: flex; gap: 14px; flex-wrap: wrap; color: var(--muted); font-size: 13px; margin-top: 12px; }

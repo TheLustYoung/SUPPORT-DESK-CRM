@@ -1,0 +1,24 @@
+/* modal and dropdowns */
+.modal-back { position: fixed; inset: 0; background: rgba(5, 3, 8, .6); backdrop-filter: blur(6px); display: grid; place-items: center; z-index: 50; padding: 16px; }
+.modal { width: min(620px, 100%); max-height: calc(100vh - 32px); display: flex; flex-direction: column; background: var(--bg-2);
+  border: 1px solid var(--border-strong); border-radius: 22px; box-shadow: var(--shadow); }
+.modal.wide { width: min(980px, 100%); }
+.modal-head, .modal-foot { display: flex; align-items: center; gap: 10px; padding: 16px 20px; }
+.modal-head { justify-content: space-between; border-bottom: 1px solid var(--border); }
+.modal-head h2 { margin: 0; font-size: 17px; }
+.modal-foot { justify-content: flex-end; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.modal-body { padding: 18px 20px; overflow-y: auto; }
+.bell, .search { position: relative; }
+.bell-count { position: absolute; top: -4px; inset-inline-end: -4px; min-width: 18px; height: 18px; border-radius: 999px; background: var(--bad);
+  color: #fff; font-size: 11px; display: grid; place-items: center; padding: 0 4px; }
+.dropdown { position: absolute; top: 48px; inset-inline-end: 0; width: 360px; max-height: 440px; overflow-y: auto; z-index: 30;
+  background: var(--bg-2); border: 1px solid var(--border-strong); border-radius: 18px; box-shadow: var(--shadow); padding: 8px; }
+.search .dropdown { inset-inline-start: 0; inset-inline-end: auto; width: 100%; min-width: 320px; }
+.search input { width: 300px; border-radius: 999px; padding-inline: 16px; }
+.dropdown-head { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px 10px; }
+.dropdown-row { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; text-align: start; padding: 8px 10px;
+  border: 0; border-radius: 12px; background: none; cursor: pointer; }
+.dropdown-row:hover { background: var(--input); }
+.dropdown-row.unread span { font-weight: 600; }
+.dropdown-row small { color: var(--muted); font-size: 12px; }
+button.profile { border: 0; background: none; cursor: pointer; text-align: start; }

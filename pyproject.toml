@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-support-desk"
+version = "1.0.0"
+description = "AfoninWebStudio Support Desk: Telegram customer support with tickets, SLA, live chat and an agent dashboard"
+license = {file = "LICENSE"}
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn[standard]>=0.32,<1", "sqlalchemy>=2.0,<2.1",
+  "psycopg[binary]>=3.2,<4", "alembic>=1.14,<2", "redis>=5,<7",
+  "celery>=5.4,<6", "pydantic-settings>=2.6,<3", "aiogram>=3.15,<4",
+  "pyotp>=2.9,<3", "sentry-sdk>=2,<3", "httpx>=0.28,<1",
+  "argon2-cffi>=23", "PyJWT>=2.10,<3", "python-multipart>=0.0.20",
+  "openpyxl>=3.1,<4", "fpdf2>=2.8,<3"
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "fakeredis>=2.26"]
+
+[tool.setuptools.packages.find]
+include = ["backend*", "bots*", "workers*", "infrastructure*"]
+
+[tool.setuptools.package-data]
+"backend.services" = ["locales/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

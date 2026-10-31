@@ -1,0 +1,20 @@
+@use 'sass:map';
+@use 'tokens';
+
+/// Spacing step from the scale: space(4) -> 16px. Unknown steps fail the build instead of drifting.
+@function space($step) {
+  @if not map.has-key(tokens.$space, $step) { @error "Unknown spacing step `#{$step}`."; }
+  @return map.get(tokens.$space, $step);
+}
+
+/// Corner radius: radius(lg) -> 22px.
+@function radius($name) {
+  @if not map.has-key(tokens.$radius, $name) { @error "Unknown radius `#{$name}`."; }
+  @return map.get(tokens.$radius, $name);
+}
+
+/// A theme colour as a CSS custom property: color(accent) -> var(--accent).
+@function color($name) {
+  @if not map.has-key(map.get(tokens.$themes, light), $name) { @error "Unknown colour token `#{$name}`."; }
+  @return var(--#{$name});
+}

@@ -1,0 +1,18 @@
+Copyright (c) 2026 Vladislav Afonin (AfoninWebStudio). All rights reserved.
+
+This repository is published so that the source code can be read and evaluated as a portfolio sample.
+
+You may view the code and run it locally for the purpose of evaluating the author's work.
+You may not, without prior written permission from the author:
+  - use the code, or any substantial part of it, in production or in a commercial product or service;
+  - copy, modify, merge, publish, distribute, sublicense or sell copies of the code;
+  - remove or alter this notice.
+
+Third-party components keep their own licences (see THIRD_PARTY_NOTICES.md).
+
+For licensing, white-label or custom implementation enquiries contact the author through the
+AfoninWebStudio website or the GitHub profile https://github.com/TheLustYoung.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.

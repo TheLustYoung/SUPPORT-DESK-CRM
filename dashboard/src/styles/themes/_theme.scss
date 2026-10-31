@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '../abstracts/tokens';
+
+@mixin emit($name) {
+  @each $token, $value in map.get(tokens.$themes, $name) { --#{$token}: #{$value}; }
+  @each $name, $value in tokens.$radius { --r-#{$name}: #{$value}; }
+  --radius: #{map.get(tokens.$radius, lg)};
+  --radius-sm: #{map.get(tokens.$radius, sm)};
+}
+
+// Light is the default (the reference), dark is opt-in from the top bar.
+:root, :root[data-theme="light"] { @include emit(light); color-scheme: light; }
+:root[data-theme="dark"] { @include emit(dark); color-scheme: dark; }

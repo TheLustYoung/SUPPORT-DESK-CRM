@@ -1,0 +1,104 @@
+@use '../abstracts/functions' as fn;
+@use '../abstracts/mixins' as mx;
+
+// Sign-in: the black brand story on the left (like the navigation rail), a white form card on the grey canvas.
+
+.auth {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: fn.space(4);
+  padding: fn.space(4);
+  background: fn.color(bg);
+  @include mx.down(tablet) { grid-template-columns: 1fr; padding: 0; }
+}
+
+.auth-story {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: fn.space(8);
+  padding: fn.space(10) clamp(24px, 4vw, 56px);
+  border-radius: fn.radius(xl);
+  background: #121214;
+  color: #f3f3f5;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(520px 360px at 85% 12%, rgba(188, 241, 39, .16), transparent 70%),
+      radial-gradient(520px 420px at 10% 95%, rgba(201, 188, 247, .18), transparent 70%);
+  }
+  .wordmark { width: min(340px, 80%); height: auto; border-radius: fn.radius(sm); background: #000; }
+  @include mx.down(tablet) { display: none; }
+}
+.auth-copy {
+  margin-top: auto;
+  .eyebrow { display: inline-block; padding: 4px 12px; border-radius: fn.radius(pill); background: fn.color(accent); color: fn.color(accent-ink);
+    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-bottom: fn.space(4); }
+  h1 { margin: 0; color: #fff; font-size: clamp(34px, 3.4vw, 50px); line-height: 1.05; letter-spacing: -.035em; max-width: 540px; }
+  p { color: #b4b4bd; font-size: 17px; line-height: 27px; margin: fn.space(4) 0 0; max-width: 470px; }
+}
+.auth-features {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: fn.space(3); max-width: 500px;
+  li { display: flex; gap: fn.space(3); align-items: center; padding: fn.space(3); border-radius: fn.radius(md); background: #1e1e22; }
+  strong { display: block; color: #fff; font-size: 14px; }
+  small { color: #a1a1aa; font-size: 13px; line-height: 18px; }
+}
+.auth-feature-icon { @include mx.circle(42px); background: fn.color(accent); color: fn.color(accent-ink); }
+.auth-foot { color: #74747d; }
+
+.auth-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: fn.space(10) fn.space(4);
+}
+.auth-top {
+  position: absolute; top: fn.space(2); inset-inline: fn.space(2);
+  display: flex; justify-content: flex-end; align-items: center; gap: fn.space(3);
+  select { background: fn.color(card); border-radius: fn.radius(pill); }
+}
+.auth-mobile-brand {
+  display: none; align-items: center; gap: fn.space(2); margin-inline-end: auto; font-weight: 600;
+  .logo-mark { border-radius: 10px; }
+  @include mx.down(tablet) { display: inline-flex; }
+}
+.auth-card {
+  @include mx.card(xl, 8);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: fn.space(5);
+  @include mx.down(mobile) { padding: fn.space(6) fn.space(5); }
+}
+.auth-card-head {
+  display: flex; align-items: center; gap: fn.space(4);
+  .logo-mark { border-radius: fn.radius(sm); }
+  h2 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+  p { margin: 2px 0 0; color: fn.color(muted); font-size: 13px; }
+}
+.input-icon {
+  position: relative; display: flex; align-items: center;
+  > svg:first-child { position: absolute; inset-inline-start: 14px; color: fn.color(muted); pointer-events: none; }
+  input { width: 100%; height: 48px; padding-inline: 42px 44px; border-radius: fn.radius(pill); background: fn.color(card-2); font-size: 15px; color: fn.color(text); }
+  &:focus-within > svg:first-child { color: fn.color(text); }
+}
+.reveal {
+  position: absolute; inset-inline-end: 6px; @include mx.circle(36px); border: 0; cursor: pointer;
+  background: transparent; color: fn.color(muted);
+  &:hover { background: fn.color(card); color: fn.color(text); }
+}
+.caps { display: inline-flex; align-items: center; gap: fn.space(1); color: fn.color(warn); }
+.auth-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: fn.space(2);
+  min-height: 50px; font-size: 15px;
+}
+.auth-note { display: flex; align-items: center; justify-content: center; gap: fn.space(2); margin: 0; color: fn.color(muted); font-size: 12px; text-align: center; }

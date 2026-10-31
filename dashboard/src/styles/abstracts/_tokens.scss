@@ -1,0 +1,48 @@
+@use 'sass:map';
+
+// Design tokens of the Support Desk ("people-first CRM" direction): light grey canvas, black navigation rail,
+// white cards, AfoninWebStudio lime for active/primary, lavender for SLA panels, coral for urgent.
+// themes/_theme.scss turns these maps into CSS custom properties; components only read var(--token).
+// Text contrast is checked by tests/unit/test_design_tokens.py (WCAG AA, 4.5:1).
+
+$brand: (
+  lime: #bcf127,      // AfoninWebStudio logo
+  lime-deep: #a3d80f,
+  lavender: #c9bcf7,
+  coral: #ff8a7a,
+  ink: #131316,
+);
+
+$themes: (
+  light: (
+    bg: #e9e9ec, bg-2: #e3e3e8, glow-1: rgba(188, 241, 39, .10), glow-2: rgba(201, 188, 247, .22),
+    frame: transparent, card: #ffffff, card-2: #f3f3f5, input: #f3f3f5,
+    border: #e3e3e8, border-strong: #cfcfd6,
+    text: #131316, muted: #5b5b64, faint: #62626b,
+    accent: map.get($brand, lime), accent-2: map.get($brand, lime-deep), accent-ink: #131316, accent-soft: rgba(188, 241, 39, .24),
+    link: #3d5a00,
+    good: #12804b, bad: #d93036, warn: #a86500,
+    lavender: map.get($brand, lavender), lavender-soft: #efebfd, lavender-ink: #2b1f63,
+    coral: map.get($brand, coral), coral-ink: #7a1a0e,
+    rail: #121214, rail-2: #1e1e22, rail-text: #f3f3f5, rail-muted: #a1a1aa,
+    shadow: 0 1px 2px rgba(19, 19, 22, .04),
+  ),
+  dark: (
+    bg: #0f0f11, bg-2: #131316, glow-1: rgba(188, 241, 39, .06), glow-2: rgba(201, 188, 247, .08),
+    frame: transparent, card: #1a1a1e, card-2: #222227, input: #222227,
+    border: #2a2a30, border-strong: #3a3a42,
+    text: #f3f3f5, muted: #a3a3ad, faint: #8b8b95,
+    accent: map.get($brand, lime), accent-2: map.get($brand, lime-deep), accent-ink: #131316, accent-soft: rgba(188, 241, 39, .16),
+    link: #c6f24a,
+    good: #4ade80, bad: #f87171, warn: #fbbf24,
+    lavender: #3a3260, lavender-soft: #26213d, lavender-ink: #e4ddff,
+    coral: #ff8a7a, coral-ink: #2a0904,
+    rail: #09090b, rail-2: #18181b, rail-text: #f3f3f5, rail-muted: #a1a1aa,
+    shadow: 0 1px 2px rgba(0, 0, 0, .3),
+  ),
+);
+
+$radius: (sm: 14px, md: 18px, lg: 22px, xl: 28px, pill: 999px);
+$space: (1: 4px, 2: 8px, 3: 12px, 4: 16px, 5: 20px, 6: 24px, 8: 32px, 10: 40px);
+$breakpoints: (mobile: 599px, tablet: 900px, wide: 1280px);
+$font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;

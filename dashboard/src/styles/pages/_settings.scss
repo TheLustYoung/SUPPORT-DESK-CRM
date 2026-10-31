@@ -1,0 +1,12 @@
+/* settings, team */
+.dept { padding: 12px; border-radius: 16px; background: var(--card-2); margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; }
+.dept .list-row { background: var(--input); }
+.matrix { border-collapse: collapse; font-size: 12px; }
+.matrix th, .matrix td { padding: 6px 8px; border: 1px solid var(--border); text-align: center; }
+.matrix tbody th { text-align: start; white-space: nowrap; }
+.perm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.perm { display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-radius: 12px; background: var(--card-2); cursor: pointer; }
+.perm small { display: block; color: var(--muted); font-size: 12px; }
+.qr { width: 200px; background: #fff; border-radius: 12px; padding: 6px; }
+.qr svg { width: 100%; height: auto; display: block; }
+.secret { display: inline-block; padding: 6px 10px; background: var(--input); border-radius: 10px; word-break: break-all; }

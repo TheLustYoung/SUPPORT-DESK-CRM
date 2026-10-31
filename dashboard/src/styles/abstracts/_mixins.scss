@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use 'tokens';
+@use 'functions' as fn;
+
+/// Media queries from the breakpoint map: @include down(tablet) { … }
+@mixin down($name) {
+  @media (max-width: map.get(tokens.$breakpoints, $name)) { @content; }
+}
+
+/// White card on the grey canvas: no heavy shadow, large radius (the reference's flat, friendly look).
+@mixin card($radius: lg, $padding: 5) {
+  background: fn.color(card);
+  border: 1px solid fn.color(border);
+  border-radius: fn.radius($radius);
+  padding: fn.space($padding);
+  box-shadow: fn.color(shadow);
+}
+
+/// Round icon button (call / chat / mail circles of the reference).
+@mixin circle($size: 40px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+/// Small rounded label (priority, status, filters).
+@mixin chip($bg, $fg) {
+  display: inline-flex;
+  align-items: center;
+  gap: fn.space(1);
+  height: 26px;
+  padding: 0 fn.space(3);
+  border-radius: fn.radius(pill);
+  background: $bg;
+  color: $fg;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@mixin tabular { font-variant-numeric: tabular-nums; letter-spacing: -.02em; }

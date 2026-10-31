@@ -1,0 +1,19 @@
+/* FAQ */
+.publish-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.faq-layout { display: grid; grid-template-columns: minmax(260px, 360px) 1fr; gap: 16px; align-items: start; }
+.tree { display: flex; flex-direction: column; gap: 2px; max-height: 70vh; overflow-y: auto; }
+.tree-row { display: flex; align-items: center; gap: 4px; border-radius: 10px; }
+.tree-row.active { background: var(--accent-soft); }
+.tree-row.off .tree-title { color: var(--faint); text-decoration: line-through; }
+.tree-title { flex: 1; text-align: start; border: 0; background: none; padding: 7px 4px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tree-tools { display: none; gap: 2px; }
+.tree-row:hover .tree-tools, .tree-row.active .tree-tools { display: flex; }
+.tree-tools button { border: 0; background: var(--input); border-radius: 8px; width: 24px; height: 24px; cursor: pointer; color: var(--muted); }
+.phone { margin-top: 12px; padding: 14px; border-radius: 22px; background: linear-gradient(160deg, #3b2a40, #1a1520); min-height: 300px; }
+.phone-msg { background: rgba(255, 255, 255, .08); border-radius: 14px; padding: 10px 12px; color: #f6f1f7; white-space: pre-wrap; }
+.phone-msg p { margin: 4px 0; }
+.phone-media { font-size: 12px; color: #c7a2c4; }
+.phone-buttons { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.phone-buttons button { border: 0; border-radius: 10px; padding: 9px; background: rgba(199, 162, 196, .22); color: #f6f1f7; cursor: pointer; }
+.phone-buttons .row { display: flex; gap: 6px; }
+.phone-buttons .row button { flex: 1; }

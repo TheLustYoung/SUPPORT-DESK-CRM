@@ -1,0 +1,29 @@
+/* ---------- shell: one large rounded frame with the sidebar and the content */
+.shell { display: grid; grid-template-columns: 250px 1fr; gap: 16px; min-height: 100%; padding: 20px; }
+.sidebar, .main-frame { background: var(--frame); border: 1px solid var(--border); border-radius: 26px; backdrop-filter: blur(22px); box-shadow: var(--shadow); }
+.sidebar { display: flex; flex-direction: column; padding: 22px 14px; position: sticky; top: 20px; height: calc(100vh - 40px); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; padding: 0 10px 22px; }
+.brand-mark { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; color: var(--accent-ink);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); font-weight: 800; }
+.nav { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
+.nav button { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 0; border-radius: 14px; background: none;
+  color: var(--muted); cursor: pointer; text-align: start; }
+.nav button:hover { color: var(--text); background: var(--input); }
+.nav button.active { color: var(--text); background: linear-gradient(90deg, var(--accent-soft), transparent); box-shadow: inset 0 0 0 1px var(--border-strong); }
+.nav .soon { margin-inline-start: auto; font-size: 10px; color: var(--faint); }
+.sidebar-foot { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 2px; }
+
+.main-frame { padding: 24px 26px 30px; min-width: 0; }
+.topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.topbar .title { flex: 1; min-width: 0; }
+.topbar h1 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.01em; }
+.topbar h1 span { color: var(--accent); }
+.topbar p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--card);
+  display: grid; place-items: center; cursor: pointer; }
+.icon-btn:hover { border-color: var(--accent); }
+.profile { display: flex; align-items: center; gap: 10px; padding-inline-start: 6px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: var(--accent-ink); }
+.profile small { display: block; color: var(--muted); font-size: 12px; }
+.menu-btn { display: none; }

@@ -1,0 +1,15 @@
+/* ---------- phones and tablets */
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; padding: 10px; }
+  .sidebar { position: fixed; inset-block: 10px; inset-inline-start: 10px; width: 260px; z-index: 20; height: auto;
+    transform: translateX(-120%); transition: transform .25s; }
+  [dir="rtl"] .sidebar { transform: translateX(120%); }
+  .shell.menu-open .sidebar { transform: none; }
+  .shell.menu-open::after { content: ""; position: fixed; inset: 0; background: rgba(0, 0, 0, .4); z-index: 10; }
+  .menu-btn { display: grid; }
+  .main-frame { padding: 16px; border-radius: 20px; }
+  .topbar h1 { font-size: 20px; }
+  .profile div { display: none; }
+  .day { grid-template-columns: 1fr auto; }
+  .day .times { grid-column: 1 / -1; }
+}

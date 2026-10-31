@@ -1,0 +1,25 @@
+# Caddy on the host: gets and renews the HTTPS certificate by itself. /etc/caddy/Caddyfile, then: systemctl reload caddy
+# Replace support.example.com; 18180 / 18181 are DASHBOARD_PORT / WEBHOOK_PORT from .env.
+support.example.com {
+	# Never from the internet: the bot's internal API and health checks.
+	@private path /internal/* /health/*
+	respond @private 404
+
+	# Telegram webhook (only used when WEBHOOK_BASE_URL is set; every call is signed with WEBHOOK_SECRET).
+	handle /telegram/webhook {
+		request_body {
+			max_size 1MB
+		}
+		reverse_proxy 127.0.0.1:18181
+	}
+
+	handle {
+		request_body {
+			max_size 25MB
+		}
+		# Caddy sends the visitor's address in X-Forwarded-For and keeps Host and Origin as they are.
+		reverse_proxy 127.0.0.1:18180 {
+			header_up X-Forwarded-For {remote_host}
+		}
+	}
+}

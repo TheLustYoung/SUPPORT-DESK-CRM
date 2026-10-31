@@ -1,0 +1,23 @@
+/* tickets */
+.ticket-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+.ticket-layout .side { position: sticky; top: 20px; }
+.ticket-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; align-items: end; }
+.sla-line { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; color: var(--muted); font-size: 13px; }
+.sla-line b { color: var(--text); }
+.chat { display: flex; flex-direction: column; gap: 10px; max-height: 60vh; overflow-y: auto; padding: 4px; }
+.bubble { max-width: 78%; padding: 10px 14px; border-radius: 18px; background: var(--card-2); border: 1px solid var(--border); align-self: flex-start; }
+.bubble.out { align-self: flex-end; background: var(--accent-soft); border-color: rgba(199, 162, 196, .35); }
+.bubble.system { align-self: center; max-width: 90%; font-size: 13px; opacity: .9; }
+.bubble.note { align-self: flex-end; background: rgba(242, 184, 102, .1); border: 1px dashed rgba(242, 184, 102, .5); }
+.bubble-head { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; font-size: 13px; }
+.bubble-head small { color: var(--muted); margin-inline-start: auto; }
+.bubble-text { white-space: pre-wrap; word-break: break-word; }
+.file-link { display: inline-block; margin-top: 6px; border: 0; background: var(--input); border-radius: 10px; padding: 6px 10px; cursor: pointer; color: var(--accent-2); }
+.delivery { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); text-align: end; }
+.delivery.failed, .delivery.blocked { color: var(--bad); }
+.delivery.sent { color: var(--good); }
+.history { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.history-row { display: grid; grid-template-columns: 140px auto 1fr; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.history-row small { color: var(--muted); }
+.composer-head, .composer-foot { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 10px 0; }
+.composer-foot { margin-bottom: 0; }

@@ -1,0 +1,140 @@
+name: telegram-support  # own project name: lives next to telegram-media on the same server (own volumes and network)
+
+x-app: &app
+  # Built once by the `migrate` service; the other services reuse the image
+  # (several services building the same tag in parallel fails with "already exists").
+  image: telegram-support-app
+  pull_policy: never
+  env_file: .env
+  restart: unless-stopped
+  networks: [private]
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  read_only: true
+  volumes:
+    - files-data:/data/files      # media library and copies of users' attachments
+    - backups:/data/backups        # written by the `backup` service; the API lists them and requests new ones
+  tmpfs: ['/tmp:size=256m,uid=10001,gid=10001,mode=1770']
+  logging:
+    driver: json-file
+    options: {max-size: 10m, max-file: '3'}
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: support
+      POSTGRES_DB: support
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes: [postgres-data:/var/lib/postgresql/data]
+    networks: [private]
+    restart: unless-stopped
+    healthcheck: {test: [CMD-SHELL, 'pg_isready -U support -d support'], interval: 10s, retries: 10}
+
+  redis:
+    image: redis:7-alpine
+    command: [redis-server, --appendonly, 'yes', --maxmemory, 128mb, --maxmemory-policy, noeviction]
+    volumes: [redis-data:/data]
+    networks: [private]
+    restart: unless-stopped
+    healthcheck: {test: [CMD, redis-cli, ping], interval: 10s, retries: 10}
+
+  migrate:
+    <<: *app
+    build: {context: ., dockerfile: infrastructure/docker/backend.Dockerfile}
+    pull_policy: missing
+    restart: 'no'
+    command: [sh, -c, 'alembic upgrade head && python -m backend.cli seed']
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+
+  api:
+    <<: *app
+    # Published only on localhost for Plesk. Change API_PORT in .env if the port is taken on the server.
+    ports: ['127.0.0.1:${API_PORT:-18100}:8000']
+    networks: [private, edge]  # Docker does not publish ports of containers on internal-only networks
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=5)"]
+      interval: 15s
+      timeout: 8s
+      retries: 5
+
+  worker:
+    <<: *app
+    # Sends replies, notifications and announcements to Telegram: needs the internet.
+    command: [celery, -A, workers.celery_app:celery, worker, --loglevel=INFO, '--concurrency=${WORKER_CONCURRENCY:-2}']
+    networks: [private, internet]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:  # the worker answers a ping through Redis
+      test: [CMD-SHELL, 'celery -A workers.celery_app:celery inspect ping -d "celery@$$HOSTNAME" --timeout 10 >/dev/null 2>&1']
+      interval: 60s
+      timeout: 30s
+      start_period: 60s
+      retries: 3
+
+  beat:
+    <<: *app
+    # Exactly one scheduler: SLA checks and warnings, reminders, auto-close, the Monday summary, scheduled announcements,
+    # recovery of lost tasks, retention.
+    command: [celery, -A, workers.celery_app:celery, beat, --loglevel=INFO, --schedule=/tmp/celerybeat-schedule]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:  # the every-minute job ran in the last 3 minutes (also shown on the System page)
+      test: [CMD, python, -m, workers.health]
+      interval: 60s
+      timeout: 20s
+      start_period: 180s
+      retries: 3
+
+  bot:
+    <<: *app
+    command: [python, -m, bots]
+    networks: [private, internet]
+    # Webhook mode (WEBHOOK_BASE_URL set): Plesk forwards https://<domain>/telegram/webhook to this port.
+    ports: ['127.0.0.1:${WEBHOOK_PORT:-18181}:8081']
+    depends_on: {api: {condition: service_healthy}}
+    healthcheck: {test: [CMD, python, -m, bots.health], interval: 60s, start_period: 60s, retries: 3}
+
+  dashboard:
+    build: dashboard
+    ports: ['127.0.0.1:${DASHBOARD_PORT:-18180}:8080']  # change DASHBOARD_PORT in .env if the port is taken
+    networks: [private, edge]
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    depends_on: {api: {condition: service_healthy}}
+    healthcheck: {test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8080/], interval: 30s, retries: 3}
+
+  # Nightly backups of the database and the files, a backup on request from the dashboard (System page), and a
+  # restore check of every backup into a scratch database.
+  backup:
+    image: postgres:16-alpine
+    command: [sh, /scripts/backup.sh]
+    environment:
+      PGHOST: postgres
+      PGUSER: support
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      PGDATABASE: support
+      BACKUP_KEEP: ${BACKUP_KEEP:-14}
+      BACKUP_HOUR: ${BACKUP_HOUR:-3}
+    volumes:
+      - ./infrastructure/backup:/scripts:ro
+      - backups:/backups
+      - files-data:/files:ro
+    networks: [private]
+    restart: unless-stopped
+    depends_on: {postgres: {condition: service_healthy}}
+
+networks:
+  private: {internal: true}  # database, Redis, backups: no direct internet access
+  internet: {}               # the bot and the worker talk to Telegram
+  edge: {}                   # api and dashboard: only for publishing their localhost ports
+
+volumes:
+  postgres-data:
+  redis-data:
+  files-data:
+  backups:

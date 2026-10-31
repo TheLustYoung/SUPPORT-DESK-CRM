@@ -1,0 +1,33 @@
+/* ---------- shared pieces of the pages */
+.card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.card-head h2 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.card-head .hint { margin: 2px 0 0; }
+.actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.grid.three { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { font-size: 13px; padding: 6px 14px; }
+.btn-primary.small, .btn-ghost.small { padding: 6px 12px; font-size: 13px; }
+.btn-ghost.danger, .btn-ghost.small.danger { color: var(--bad); border-color: rgba(255, 107, 129, .4); }
+label.btn-ghost, label.btn-primary { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.icon-btn.small { width: 30px; height: 30px; font-size: 13px; }
+.grow { flex: 1; min-width: 0; }
+.muted { color: var(--muted); }
+.bad { color: var(--bad); }
+.small { font-size: 12px; }
+.pre { white-space: pre-wrap; word-break: break-word; }
+.ellipsis { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+code { font-family: ui-monospace, Consolas, monospace; font-size: 12px; color: var(--accent-2); }
+.notice.warn { background: rgba(242, 184, 102, .12); color: var(--warn); }
+.empty { padding: 24px; text-align: center; color: var(--muted); }
+.stack { display: flex; flex-direction: column; gap: 12px; border: 0; padding: 0; margin: 0; min-width: 0; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; border: 0; padding: 0; margin: 0; }
+.form-grid .wide, .field.wide { grid-column: 1 / -1; }
+label.inline { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; }
+.inline-form { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filters input[type="text"] { min-width: 220px; }
+textarea { width: 100%; resize: vertical; }
+input[type="date"], input[type="datetime-local"], input[type="search"], input[type="color"] {
+  background: var(--input); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; color: inherit; }
+input[type="color"] { padding: 2px; height: 38px; width: 64px; }
